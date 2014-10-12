@@ -10,24 +10,31 @@
 
     <main>
       <h2>Export your MyFitnessPal food diary to Excel and JSON
-in 2 easy steps:</h2>
+in 3 easy steps:</h2>
       <div class="steps">
-        <div class="step1">
-          <p>1. Enter your MyFitnessPal username:</p>
-          <input type="text"></input>
+        <div class="step">
+          <p>1. Verify your MyFitnessPal diary is public:</p>
+          <input type="text" placeholder="enter your username"></input>
+          <button>Check</button>
         </div>
 
-        <div class="step2">
-          <p>2. Download your data:</p>
-          <input type="text"></input>
-          <br>
+        <div class="step">
+          <p>2. Select which dates you want to download data for:</p>
+        </div>
+
+        <div class="step">
+          <p>3. Download your data:</p>
           <button>Download JSON</button>
           <button>Download Excel (.xls)</button>
         </div>
 
       </div>
     </main>
-
-
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    $.post( "api/userCheck", {"username": "azey47"}, function( data ) {
+      console.log(data);
+    });
+  </script>
   </body>
 </html>
