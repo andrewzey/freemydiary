@@ -14,8 +14,10 @@ in 3 easy steps:</h2>
       <div class="steps">
         <div class="step">
           <p>1. Verify your MyFitnessPal diary is public:</p>
-          <input type="text" placeholder="enter your username"></input>
-          <button>Check</button>
+          <form id="mfp-username">
+            <input type="text" placeholder="enter your username"></input>
+            <button type="submit">Check</button>
+          </form>
         </div>
 
         <div class="step">
@@ -32,8 +34,16 @@ in 3 easy steps:</h2>
     </main>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
-    $.post( "api/userCheck", {"username": "azey47"}, function( data ) {
-      console.log(data);
+    $('#mfp-username').submit(function(event) {
+      var $username = $("input:first").val();
+
+      if ($username !== '') {
+        $.post( "api/userCheck", {"username": $username }, function( data ) {
+          console.log(data);
+          $("input:first").val('');
+        });
+      }
+      event.preventDefault();
     });
   </script>
   </body>
