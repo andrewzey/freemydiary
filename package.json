@@ -1,0 +1,25 @@
+{
+  "name": "freemydiary",
+  "version": "1.0.0",
+  "description": "freemydiary ===========",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.9.7",
+    "mfp": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewzey/freemydiary.git"
+  },
+  "author": "Andrew Zey <andrew@andrewzey.com> (http://andrewzey.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewzey/freemydiary/issues"
+  },
+  "homepage": "https://github.com/andrewzey/freemydiary"
+}
