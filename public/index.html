@@ -31,15 +31,45 @@ in 3 easy steps:</h2>
           <div class="step">
             <p>3. Download your Data:</p>
             <button type="submit">Download Excel (.xls)</button>
+            <a href="" id="csvLink" download="mfp-data.csv"></a>
             <!-- <button type="submit">Download JSON</button> -->
           </div>
         </form>
 
       </div>
+
+      <button class="test">AJAX Test</button>
     </main>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
+      var convertToCSV = function(arrayOfDateObjects){
+        var csv = "date";
+        var nutrients = [];
+
+        //define available nutrient fields and create header line in csv
+        for (var nutrient in arrayOfDateObjects[0]) {
+          if (nutrient !== 'date') {
+            nutrients.push(nutrient);
+            csv += "," + nutrient;
+          }
+        }
+        console.log(csv);
+
+        //add nutrient data into csv string
+        for(var i=0; i < arrayOfDateObjects.length; i++) {
+          var dateObject = arrayOfDateObjects[i];
+
+          csv += "\n" + dateObject.date;
+
+          for (var j=0; j < nutrients.length; j++) {
+            csv += "," + dateObject[nutrients[j]];
+          }
+    		}
+        console.log(csv);
+        return csv;
+      };
+
       var $username;
       var $startDate;
       var $endDate;
@@ -66,14 +96,29 @@ in 3 easy steps:</h2>
           "endDate": $endDate
         };
 
-        $.get( "api/fetchData", fetchParams, function( data ){
-          console.log(data);
+        $.get( "api/fetchData", fetchParams, function( results ){
+          console.log(results);
+          convertToCSV(results.data);
           $("#username").val('');
           $("#startDate").val('');
           $("#endDate").val('');
         });
         event.preventDefault();
       });
+
+      $(".test").on("click", function(event){
+        $.get( "api/fetchData", {username: "azey47", startDate: "2014-10-07", endDate: "2014-10-10"}, function( results ){
+          console.log(results);
+          var csv = convertToCSV(results.data);
+          console.log($(this));
+          $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
+          $("#username").val('');
+          $("#startDate").val('');
+          $("#endDate").val('');
+        });
+        event.preventDefault();
+      });
+
     });
   </script>
   </body>
