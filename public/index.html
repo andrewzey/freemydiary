@@ -97,8 +97,9 @@ in 3 easy steps:</h2>
         };
 
         $.get( "api/fetchData", fetchParams, function( results ){
-          console.log(results);
+          var csv = convertToCSV(results.data);
           convertToCSV(results.data);
+          $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
           $("#username").val('');
           $("#startDate").val('');
           $("#endDate").val('');
@@ -108,9 +109,7 @@ in 3 easy steps:</h2>
 
       $(".test").on("click", function(event){
         $.get( "api/fetchData", {username: "azey47", startDate: "2014-10-07", endDate: "2014-10-10"}, function( results ){
-          console.log(results);
           var csv = convertToCSV(results.data);
-          console.log($(this));
           $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
           $("#username").val('');
           $("#startDate").val('');
