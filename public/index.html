@@ -13,37 +13,67 @@
 in 3 easy steps:</h2>
       <div class="steps">
         <div class="step">
-          <p>1. Verify your MyFitnessPal diary is public:</p>
+          <p>1. Verify your MyFitnessPal Diary is Public:</p>
           <form id="mfp-username">
-            <input type="text" placeholder="enter your username"></input>
+            <input id="username" type="text" required placeholder="enter your username"></input>
             <button type="submit">Check</button>
           </form>
         </div>
 
-        <div class="step">
-          <p>2. Select which dates you want to download data for:</p>
-        </div>
+        <form id="mfp-fetch">
+          <div class="step">
+            <p>2. Select Date Range:</p>
+            <input id="startDate" type="text" required placeholder="YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Please enter valid date in YYYY-MM-DD format"></input>
+            <span>to</span>
+            <input id="endDate" type="text" required placeholder="YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Please enter valid date in YYYY-MM-DD format"></input>
+          </div>
 
-        <div class="step">
-          <p>3. Download your data:</p>
-          <button>Download JSON</button>
-          <button>Download Excel (.xls)</button>
-        </div>
+          <div class="step">
+            <p>3. Download your Data:</p>
+            <button type="submit">Download Excel (.xls)</button>
+            <!-- <button type="submit">Download JSON</button> -->
+          </div>
+        </form>
 
       </div>
     </main>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
-    $('#mfp-username').submit(function(event) {
-      var $username = $("input:first").val();
+    $(document).ready(function() {
+      var $username;
+      var $startDate;
+      var $endDate;
 
-      if ($username !== '') {
-        $.post( "api/userCheck", {"username": $username }, function( data ) {
+      //Diary Check
+      $('#mfp-username').submit(function(event) {
+        $username = $('#username').val();
+
+        if ($username !== '') {
+          $.get( "api/userCheck", {"username": $username }, function( data ) {
+            console.log(data);
+          });
+        }
+        event.preventDefault();
+      });
+
+      //Fetch Data
+      $('#mfp-fetch').submit(function(event) {
+        $startDate = $('#startDate').val();
+        $endDate = $('#endDate').val();
+        var fetchParams = {
+          "username": $username,
+          "startDate": $startDate,
+          "endDate": $endDate
+        };
+
+        $.get( "api/fetchData", fetchParams, function( data ){
           console.log(data);
-          $("input:first").val('');
+          $("#username").val('');
+          $("#startDate").val('');
+          $("#endDate").val('');
         });
-      }
-      event.preventDefault();
+        event.preventDefault();
+      });
     });
   </script>
   </body>

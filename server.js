@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 app.use(bodyParser.json()); // parse application/json
 
 //API Route Handling
-app.post('/api/userCheck', handlers.userCheck);
+app.get('/api/userCheck', handlers.userCheck);
+app.get('/api/fetchData', handlers.fetchData);
 
 app.listen(process.env.PORT || 3000);
