@@ -19,6 +19,7 @@
           <div class="step">
             <p>1. Verify your MyFitnessPal Diary is Public:</p>
             <input id="username" type="text" required placeholder="enter your username"></input>
+            <span id='username-loader'><img src="img/spinner.gif"/></span>
           </div>
 
           <div class="step">
@@ -151,7 +152,6 @@
 
       </div>
 
-      <!-- <button class="test">AJAX Test</button> -->
     </main>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
@@ -188,12 +188,23 @@
       var $endDate;
 
       //Diary Check
-      $('#mfp-username').submit(function(event) {
+      $("#username").focusout(function(){
+        //store username
         $username = $('#username').val();
 
         if ($username !== '') {
-          $.get( "api/userCheck", {"username": $username }, function( data ) {
-            console.log(data);
+          $.ajax({
+            url: "api/userCheck",
+            data: {"username": $username },
+            beforeSend: function() {
+               $('#username-loader').css({visibility: "visible"});
+            },
+            complete: function(){
+               $('#username-loader').css({visibility: "hidden"});
+            },
+            success: function(data) {
+              console.log(data);
+            }
           });
         }
         event.preventDefault();
@@ -212,17 +223,6 @@
         $.get( "api/fetchData", fetchParams, function( results ){
           var csv = convertToCSV(results.data);
           convertToCSV(results.data);
-          $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
-          $("#username").val('');
-          $("#startDate").val('');
-          $("#endDate").val('');
-        });
-        event.preventDefault();
-      });
-
-      $(".test").on("click", function(event){
-        $.get( "api/fetchData", {username: "azey47", startDate: "2014-10-07", endDate: "2014-10-10"}, function( results ){
-          var csv = convertToCSV(results.data);
           $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
           $("#username").val('');
           $("#startDate").val('');

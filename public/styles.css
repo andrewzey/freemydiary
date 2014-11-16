@@ -34,6 +34,14 @@ div.step {
   padding: 30px;
 }
 
+span#username-loader {
+  position: relative;
+  visibility: hidden;
+  top: 5px;
+  left: 26px;
+  margin-left: -24px;
+}
+
 select#start-year {
   margin-bottom: 10px;
 }

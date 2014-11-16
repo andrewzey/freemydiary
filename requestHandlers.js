@@ -5,7 +5,7 @@ var requestHandlers = {};
 requestHandlers.userCheck = function(req, res){
   var username = req.param("username");
   mfp.diaryStatusCheck(username, function(status) {
-    res.send('Username: '+ username + ', Diary: ' + status);
+    res.send({'username': username,'status': status});
   });
 };
 
