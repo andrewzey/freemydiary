@@ -2,43 +2,156 @@
 <html>
   <head>
     <title>FreeMyDiary.com</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
   </head>
+  
   <body>
     <header>
       <h1>FreeMyDiary.com</h1>
     </header>
 
     <main>
-      <h2>Export your MyFitnessPal food diary to Excel and JSON
-in 3 easy steps:</h2>
+      <h2>Export your MyFitnessPal food diary to Excel in 3 easy steps:</h2>
       <div class="steps">
-        <div class="step">
-          <p>1. Verify your MyFitnessPal Diary is Public:</p>
-          <form id="mfp-username">
-            <input id="username" type="text" required placeholder="enter your username"></input>
-            <button type="submit">Check</button>
-          </form>
-        </div>
-
-        <form id="mfp-fetch">
+        <form>
           <div class="step">
-            <p>2. Select Date Range:</p>
-            <input id="startDate" type="text" required placeholder="YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Please enter valid date in YYYY-MM-DD format"></input>
-            <span>to</span>
-            <input id="endDate" type="text" required placeholder="YYYY-MM-DD" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="Please enter valid date in YYYY-MM-DD format"></input>
+            <p>1. Verify your MyFitnessPal Diary is Public:</p>
+            <input id="username" type="text" required placeholder="enter your username"></input>
           </div>
 
           <div class="step">
-            <p>3. Download your Data:</p>
-            <button type="submit">Download Excel (.xls)</button>
+            <p>2. Select Date Range:</p>
+            <span> Start Date:
+            <select id="start-month" name="start-month">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select id="start-day" name="start-day">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select id="start-year" name="start-year">
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+            </select>
+            <br>
+            <span> End Date:
+            <select id="end-month" name="end-month">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select id="end-day" name="end-day">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select id="end-year" name="end-year">
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+            </select>
+          </div>
+
+          <div class="step">
+            <p>3. Download your Data in CSV Format:</p>
+            <button type="submit">Download CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
-            <!-- <button type="submit">Download JSON</button> -->
           </div>
         </form>
 
       </div>
 
-      <button class="test">AJAX Test</button>
+      <!-- <button class="test">AJAX Test</button> -->
     </main>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>

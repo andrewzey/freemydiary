@@ -1,0 +1,52 @@
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+header, main, footer {
+  min-width: 700px;
+  /*border: 1px solid red;*/
+}
+
+header {
+  display: block;
+  height: 100px;
+  background-color: #2878ca;
+}
+
+div.steps {
+  width: 600px;
+  margin: 0 auto 0;
+  text-align: center;
+  border-top: 1px solid #d9d9d9;
+}
+
+div.steps p {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #363636;
+}
+
+div.step {
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  padding: 30px;
+}
+
+select#start-year {
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  line-height: 100px;
+  color: white;
+}
+
+h2 {
+  font-weight: 400;
+  text-align: center;
+  margin: 40px 0;
+}
