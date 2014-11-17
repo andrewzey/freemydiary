@@ -193,7 +193,25 @@
       //DOM Elements Used by Event Handlers
       $username = $("#username");
       $usernameStatus = $('#username-status');
-      $downloadButton = $('button#download')
+      $downloadButton = $('button#download');
+
+      //Set Default Dates to Today
+      var today = new Date();
+      var month = today.getMonth() + 1;
+      var year = today.getFullYear();
+      var day = today.getDate();
+
+      console.log('Year:', year);
+      console.log('Month:', month);
+      console.log('Day:', day);
+
+      // $('#start-month[value="'+month+'"]').prop('selected', true);
+      $("#start-month").val(month);
+      $('#start-day').val(day);
+      $('#start-year').val(year);
+      $('#end-month').val(month);
+      $('#end-day').val(day);
+      $('#end-year').val(year);
 
       //Username Input Focus In Event Handler
       $username.focusin(function(){
