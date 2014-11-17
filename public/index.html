@@ -147,7 +147,7 @@
 
           <div class="step">
             <p>3. Download your Data in CSV Format:</p>
-            <button type="submit" disabled>Download CSV File</button>
+            <button id="download"type="submit" disabled>Download CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
           </div>
         </form>
@@ -193,6 +193,7 @@
       //DOM Elements Used by Event Handlers
       $username = $("#username");
       $usernameStatus = $('#username-status');
+      $downloadButton = $('button#download')
 
       //Username Input Focus In Event Handler
       $username.focusin(function(){
@@ -201,6 +202,7 @@
         $usernameStatus.find('i').addClass('fa');
         $usernameStatus.find('i').addClass('fa-spin');
         $usernameStatus.find('i').addClass('fa-spinner');
+        $downloadButton.prop('disabled', true);
       });
 
       //Username Input Focus Out Event Handler
@@ -216,7 +218,15 @@
             },
             success: function(data) {
               console.log(data);
-              var icon = (data.status === 'public') ? 'fa-check' : 'fa-times';
+
+              var icon;
+
+              if (data.status === 'public') {
+                icon = 'fa-check';
+                $downloadButton.prop('disabled', false);
+              } else {
+                icon = 'fa-times';
+              }
 
               $usernameStatus.css({visibility: "hidden"});
               $usernameStatus.find('i').removeClass('fa-spin');
@@ -239,7 +249,7 @@
           "endDate": $endDate
         };
 
-        $.get( "api/fetchData", fetchParams, function( results ){
+        $.get("api/fetchData", fetchParams, function( results ){
           var csv = convertToCSV(results.data);
           convertToCSV(results.data);
           $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
