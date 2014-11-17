@@ -209,48 +209,55 @@
       $('#end-day').val(day);
       $('#end-year').val(year);
 
-      //Username Input Focus In Event Handler
-      $username.focusin(function(){
+      var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+          clearTimeout (timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+
+      $username.keyup(function(e) {
+        //reset spinner
         $usernameStatus.css({visibility: "hidden"});
         $usernameStatus.find('i').removeClass();
         $usernameStatus.find('i').addClass('fa');
         $usernameStatus.find('i').addClass('fa-spin');
         $usernameStatus.find('i').addClass('fa-spinner');
         $downloadButton.prop('disabled', true);
-      });
 
-      //Username Input Focus Out Event Handler
-      $username.focusout(function(){
-        formUsername = $(this).val();
+        //set delay for ajax request
+        delay(function(){
+          formUsername = $username.val();
 
-        if (formUsername !== '') {
-          $.ajax({
-            url: "api/userCheck",
-            data: {"username": formUsername },
-            beforeSend: function() {
-               $usernameStatus.css({visibility: "visible"});
-            },
-            success: function(data) {
-              // console.log(data);
+          if (formUsername !== '') {
+            $.ajax({
+              url: "api/userCheck",
+              data: {"username": formUsername },
+              beforeSend: function() {
+                 $usernameStatus.css({visibility: "visible"});
+              },
+              success: function(data) {
+                // console.log(data);
 
-              var icon;
+                var icon;
 
-              if (data.status === 'public') {
-                icon = 'fa-check';
-                $downloadButton.prop('disabled', false);
-              } else {
-                icon = 'fa-times';
+                if (data.status === 'public') {
+                  icon = 'fa-check';
+                  $downloadButton.prop('disabled', false);
+                } else {
+                  icon = 'fa-times';
+                }
+
+                $usernameStatus.css({visibility: "hidden"});
+                $usernameStatus.find('i').removeClass('fa-spin');
+                $usernameStatus.find('i').removeClass('fa-spinner');
+                $usernameStatus.find('i').addClass(icon);
+                $usernameStatus.css({visibility: "visible"});
               }
-
-              $usernameStatus.css({visibility: "hidden"});
-              $usernameStatus.find('i').removeClass('fa-spin');
-              $usernameStatus.find('i').removeClass('fa-spinner');
-              $usernameStatus.find('i').addClass(icon);
-              $usernameStatus.css({visibility: "visible"});
-            }
-          });
-        }
-        event.preventDefault();
+            });
+          }
+        }, 1000 );
       });
 
       //Fetch Data
