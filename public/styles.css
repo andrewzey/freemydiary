@@ -34,7 +34,7 @@ div.step {
   padding: 30px;
 }
 
-span#username-status {
+span.spinner {
   position: relative;
   visibility: hidden;
   font-size: 24px;

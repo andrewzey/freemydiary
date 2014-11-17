@@ -21,36 +21,36 @@
           <div class="step">
             <p>1. Verify your MyFitnessPal Diary is Public:</p>
             <input id="username" type="text" required placeholder="enter your username"></input>
-            <span id='username-status'><i class="fa fa-spinner fa-spin"></i></span>
+            <span id='username-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
           </div>
 
           <div class="step">
             <p>2. Select Date Range:</p>
             <span> Start Date:
             <select id="start-month" name="start-month">
-              <option value="1">January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-              <option value="4">April</option>
-              <option value="5">May</option>
-              <option value="6">June</option>
-              <option value="7">July</option>
-              <option value="8">August</option>
-              <option value="9">September</option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
               <option value="10">October</option>
               <option value="11">November</option>
               <option value="12">December</option>
             </select>
             <select id="start-day" name="start-day">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
               <option value="10">10</option>
               <option value="11">11</option>
               <option value="12">12</option>
@@ -87,29 +87,29 @@
             <br>
             <span> End Date:
             <select id="end-month" name="end-month">
-              <option value="1">January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-              <option value="4">April</option>
-              <option value="5">May</option>
-              <option value="6">June</option>
-              <option value="7">July</option>
-              <option value="8">August</option>
-              <option value="9">September</option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
               <option value="10">October</option>
               <option value="11">November</option>
               <option value="12">December</option>
             </select>
             <select id="end-day" name="end-day">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
               <option value="10">10</option>
               <option value="11">11</option>
               <option value="12">12</option>
@@ -147,8 +147,9 @@
 
           <div class="step">
             <p>3. Download your Data in CSV Format:</p>
-            <button id="download"type="submit" disabled>Download CSV File</button>
+            <button id="download" type="submit" disabled>Download CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
+            <span id='download-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
           </div>
         </form>
 
@@ -193,19 +194,14 @@
       //DOM Elements Used by Event Handlers
       $username = $("#username");
       $usernameStatus = $('#username-status');
+      $downloadStatus = $('#download-status');
       $downloadButton = $('button#download');
 
-      //Set Default Dates to Today
+      //Set Default Date-Picker Dates to Today
       var today = new Date();
       var month = today.getMonth() + 1;
       var year = today.getFullYear();
       var day = today.getDate();
-
-      console.log('Year:', year);
-      console.log('Month:', month);
-      console.log('Day:', day);
-
-      // $('#start-month[value="'+month+'"]').prop('selected', true);
       $("#start-month").val(month);
       $('#start-day').val(day);
       $('#start-year').val(year);
@@ -258,22 +254,44 @@
       });
 
       //Fetch Data
-      $('#mfp-fetch').submit(function(event) {
-        $startDate = $('#startDate').val();
-        $endDate = $('#endDate').val();
+      $('form').submit(function(event) {
+        formStartDate = $('#start-year').val() + '-' + 
+                        $('#start-month').val() + '-' + 
+                        $('#start-day').val();
+
+        formEndDate = $('#end-year').val() + '-' + 
+                        $('#end-month').val() + '-' + 
+                        $('#end-day').val();
+      
         var fetchParams = {
-          "username": $username,
-          "startDate": $startDate,
-          "endDate": $endDate
+          "username": formUsername,
+          "startDate": formStartDate,
+          "endDate": formEndDate
         };
 
-        $.get("api/fetchData", fetchParams, function( results ){
-          var csv = convertToCSV(results.data);
-          convertToCSV(results.data);
-          $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
-          $("#username").val('');
-          $("#startDate").val('');
-          $("#endDate").val('');
+      //   $.get("api/fetchData", fetchParams, function( results ){
+      //     var csv = convertToCSV(results.data);
+      //     convertToCSV(results.data);
+      //     $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
+      //     $("#username").val('');
+      //     $("#startDate").val('');
+      //     $("#endDate").val('');
+      //   });
+
+        $.ajax({
+          url: "api/fetchData",
+          data: fetchParams,
+          beforeSend: function() {
+             $downloadStatus.css({visibility: "visible"});
+          },
+          success: function(results) {
+            var csv = convertToCSV(results.data);
+            convertToCSV(results.data);
+
+            $downloadStatus.css({visibility: "hidden"});
+
+            $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
+          }
         });
         event.preventDefault();
       });
