@@ -64,6 +64,10 @@ h2 {
   margin: 40px 0;
 }
 
+input#username {
+  padding: 5px 8px;
+}
+
 button#download {
   -moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
   -webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
