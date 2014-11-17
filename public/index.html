@@ -4,7 +4,9 @@
     <title>FreeMyDiary.com</title>
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
   
   <body>
@@ -19,7 +21,7 @@
           <div class="step">
             <p>1. Verify your MyFitnessPal Diary is Public:</p>
             <input id="username" type="text" required placeholder="enter your username"></input>
-            <span id='username-loader'><img src="img/spinner.gif"/></span>
+            <span id='username-status'><i class="fa fa-spinner fa-spin"></i></span>
           </div>
 
           <div class="step">
@@ -145,7 +147,7 @@
 
           <div class="step">
             <p>3. Download your Data in CSV Format:</p>
-            <button type="submit">Download CSV File</button>
+            <button type="submit" disabled>Download CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
           </div>
         </form>
@@ -183,27 +185,44 @@
         return csv;
       };
 
-      var $username;
-      var $startDate;
-      var $endDate;
+      //Form Values
+      var formUsername;
+      var formStartDate;
+      var formEndDate;
 
-      //Diary Check
-      $("#username").focusout(function(){
-        //store username
-        $username = $('#username').val();
+      //DOM Elements Used by Event Handlers
+      $username = $("#username");
+      $usernameStatus = $('#username-status');
 
-        if ($username !== '') {
+      //Username Input Focus In Event Handler
+      $username.focusin(function(){
+        $usernameStatus.css({visibility: "hidden"});
+        $usernameStatus.find('i').removeClass();
+        $usernameStatus.find('i').addClass('fa');
+        $usernameStatus.find('i').addClass('fa-spin');
+        $usernameStatus.find('i').addClass('fa-spinner');
+      });
+
+      //Username Input Focus Out Event Handler
+      $username.focusout(function(){
+        formUsername = $(this).val();
+
+        if (formUsername !== '') {
           $.ajax({
             url: "api/userCheck",
-            data: {"username": $username },
+            data: {"username": formUsername },
             beforeSend: function() {
-               $('#username-loader').css({visibility: "visible"});
-            },
-            complete: function(){
-               $('#username-loader').css({visibility: "hidden"});
+               $usernameStatus.css({visibility: "visible"});
             },
             success: function(data) {
               console.log(data);
+              var icon = (data.status === 'public') ? 'fa-check' : 'fa-times';
+
+              $usernameStatus.css({visibility: "hidden"});
+              $usernameStatus.find('i').removeClass('fa-spin');
+              $usernameStatus.find('i').removeClass('fa-spinner');
+              $usernameStatus.find('i').addClass(icon);
+              $usernameStatus.css({visibility: "visible"});
             }
           });
         }

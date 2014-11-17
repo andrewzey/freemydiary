@@ -34,13 +34,18 @@ div.step {
   padding: 30px;
 }
 
-span#username-loader {
+span#username-status {
   position: relative;
   visibility: hidden;
-  top: 5px;
-  left: 26px;
+  font-size: 24px;
+  top: 3px;
+  left: 28px;
   margin-left: -24px;
 }
+
+span#username-status i.fa-spinner { color: #444; }
+span#username-status i.fa-check { color: green; }
+span#username-status i.fa-times { color: red; }
 
 select#start-year {
   margin-bottom: 10px;
