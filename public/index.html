@@ -231,7 +231,7 @@
                $usernameStatus.css({visibility: "visible"});
             },
             success: function(data) {
-              console.log(data);
+              // console.log(data);
 
               var icon;
 
@@ -268,15 +268,6 @@
           "startDate": formStartDate,
           "endDate": formEndDate
         };
-
-      //   $.get("api/fetchData", fetchParams, function( results ){
-      //     var csv = convertToCSV(results.data);
-      //     convertToCSV(results.data);
-      //     $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
-      //     $("#username").val('');
-      //     $("#startDate").val('');
-      //     $("#endDate").val('');
-      //   });
 
         $.ajax({
           url: "api/fetchData",
