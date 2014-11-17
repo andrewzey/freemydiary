@@ -15,17 +15,17 @@
     </header>
 
     <main>
-      <h2>Export your MyFitnessPal food diary to Excel in 3 easy steps:</h2>
+      <h2>Export your MyFitnessPal Nutrient Data to CSV (Opens in Microsoft Excel):</h2>
       <div class="steps">
         <form>
           <div class="step">
-            <p>1. Verify your MyFitnessPal Diary is Public:</p>
+            <p>Step 1. Verify your MyFitnessPal Diary is Public:</p>
             <input id="username" type="text" required placeholder="enter your username"></input>
             <span id='username-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
           </div>
 
           <div class="step">
-            <p>2. Select Date Range:</p>
+            <p>Step 2. Select Date Range:</p>
             <span> Start Date:
             <select id="start-month" name="start-month">
               <option value="01">January</option>
@@ -146,8 +146,8 @@
           </div>
 
           <div class="step">
-            <p>3. Download your Data in CSV Format:</p>
-            <button id="download" type="submit" disabled>Download CSV File</button>
+            <p>Step 3. Download your Data in CSV Format:</p>
+            <button id="download" type="submit" disabled>Download .CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
             <span id='download-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
           </div>
@@ -231,7 +231,7 @@
                $usernameStatus.css({visibility: "visible"});
             },
             success: function(data) {
-              console.log(data);
+              // console.log(data);
 
               var icon;
 
@@ -268,15 +268,6 @@
           "startDate": formStartDate,
           "endDate": formEndDate
         };
-
-      //   $.get("api/fetchData", fetchParams, function( results ){
-      //     var csv = convertToCSV(results.data);
-      //     convertToCSV(results.data);
-      //     $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
-      //     $("#username").val('');
-      //     $("#startDate").val('');
-      //     $("#endDate").val('');
-      //   });
 
         $.ajax({
           url: "api/fetchData",
