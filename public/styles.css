@@ -1,4 +1,10 @@
+html {
+  height: 100%;
+  margin: 0;
+}
+
 body {
+  height: 100%;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -13,9 +19,28 @@ header {
   background-color: #2878ca;
 }
 
+div.page-wrap {
+  display: block;
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -70px;
+
+}
+
+div.page-wrap:after {
+  content: "";
+  display: block;
+}
+footer, div.page-wrap:after {
+  height: 70px; 
+}
+footer {
+  background: #404040;
+}
+
 div.steps {
   width: 600px;
-  margin: 0 auto 0;
+  margin: 0 auto 40px;
   text-align: center;
   border-top: 1px solid #d9d9d9;
 }
