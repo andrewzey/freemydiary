@@ -146,8 +146,8 @@
           </div>
 
           <div class="step">
-            <p>Step 3. Download your Data in CSV Format:</p>
-            <button id="download" type="submit" disabled>Download .CSV File</button>
+            <p>Step 3. Download your Data:</p>
+            <button id="download" class="disabled" type="submit" disabled>Download .CSV File</button>
             <a href="" id="csvLink" download="mfp-data.csv"></a>
             <span id='download-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
           </div>
@@ -218,13 +218,14 @@
       })();
 
       $username.keyup(function(e) {
-        //reset spinner
+        //reset spinner & download button availability
         $usernameStatus.css({visibility: "hidden"});
         $usernameStatus.find('i').removeClass();
         $usernameStatus.find('i').addClass('fa');
         $usernameStatus.find('i').addClass('fa-spin');
         $usernameStatus.find('i').addClass('fa-spinner');
         $downloadButton.prop('disabled', true);
+        $downloadButton.addClass('disabled');
 
         //set delay for ajax request
         delay(function(){
@@ -245,6 +246,7 @@
                 if (data.status === 'public') {
                   icon = 'fa-check';
                   $downloadButton.prop('disabled', false);
+                  $downloadButton.removeClass('disabled');
                 } else {
                   icon = 'fa-times';
                 }
