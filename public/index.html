@@ -2,8 +2,301 @@
 <html>
   <head>
     <title>FreeMyDiary.com</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
+  
   <body>
-    <p>Welcome to FreeMyDiary.com!</p>
+    <header>
+      <h1>FreeMyDiary.com</h1>
+    </header>
+
+    <main>
+      <h2>Export your MyFitnessPal food diary to Excel in 3 easy steps:</h2>
+      <div class="steps">
+        <form>
+          <div class="step">
+            <p>1. Verify your MyFitnessPal Diary is Public:</p>
+            <input id="username" type="text" required placeholder="enter your username"></input>
+            <span id='username-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
+          </div>
+
+          <div class="step">
+            <p>2. Select Date Range:</p>
+            <span> Start Date:
+            <select id="start-month" name="start-month">
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select id="start-day" name="start-day">
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select id="start-year" name="start-year">
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+            </select>
+            <br>
+            <span> End Date:
+            <select id="end-month" name="end-month">
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <select id="end-day" name="end-day">
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select id="end-year" name="end-year">
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+            </select>
+          </div>
+
+          <div class="step">
+            <p>3. Download your Data in CSV Format:</p>
+            <button id="download" type="submit" disabled>Download CSV File</button>
+            <a href="" id="csvLink" download="mfp-data.csv"></a>
+            <span id='download-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
+          </div>
+        </form>
+
+      </div>
+
+    </main>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var convertToCSV = function(arrayOfDateObjects){
+        var csv = "date";
+        var nutrients = [];
+
+        //define available nutrient fields and create header line in csv
+        for (var nutrient in arrayOfDateObjects[0]) {
+          if (nutrient !== 'date') {
+            nutrients.push(nutrient);
+            csv += "," + nutrient;
+          }
+        }
+        console.log(csv);
+
+        //add nutrient data into csv string
+        for(var i=0; i < arrayOfDateObjects.length; i++) {
+          var dateObject = arrayOfDateObjects[i];
+
+          csv += "\n" + dateObject.date;
+
+          for (var j=0; j < nutrients.length; j++) {
+            csv += "," + dateObject[nutrients[j]];
+          }
+    		}
+        console.log(csv);
+        return csv;
+      };
+
+      //Form Values
+      var formUsername;
+      var formStartDate;
+      var formEndDate;
+
+      //DOM Elements Used by Event Handlers
+      $username = $("#username");
+      $usernameStatus = $('#username-status');
+      $downloadStatus = $('#download-status');
+      $downloadButton = $('button#download');
+
+      //Set Default Date-Picker Dates to Today
+      var today = new Date();
+      var month = today.getMonth() + 1;
+      var year = today.getFullYear();
+      var day = today.getDate();
+      $("#start-month").val(month);
+      $('#start-day').val(day);
+      $('#start-year').val(year);
+      $('#end-month').val(month);
+      $('#end-day').val(day);
+      $('#end-year').val(year);
+
+      //Username Input Focus In Event Handler
+      $username.focusin(function(){
+        $usernameStatus.css({visibility: "hidden"});
+        $usernameStatus.find('i').removeClass();
+        $usernameStatus.find('i').addClass('fa');
+        $usernameStatus.find('i').addClass('fa-spin');
+        $usernameStatus.find('i').addClass('fa-spinner');
+        $downloadButton.prop('disabled', true);
+      });
+
+      //Username Input Focus Out Event Handler
+      $username.focusout(function(){
+        formUsername = $(this).val();
+
+        if (formUsername !== '') {
+          $.ajax({
+            url: "api/userCheck",
+            data: {"username": formUsername },
+            beforeSend: function() {
+               $usernameStatus.css({visibility: "visible"});
+            },
+            success: function(data) {
+              console.log(data);
+
+              var icon;
+
+              if (data.status === 'public') {
+                icon = 'fa-check';
+                $downloadButton.prop('disabled', false);
+              } else {
+                icon = 'fa-times';
+              }
+
+              $usernameStatus.css({visibility: "hidden"});
+              $usernameStatus.find('i').removeClass('fa-spin');
+              $usernameStatus.find('i').removeClass('fa-spinner');
+              $usernameStatus.find('i').addClass(icon);
+              $usernameStatus.css({visibility: "visible"});
+            }
+          });
+        }
+        event.preventDefault();
+      });
+
+      //Fetch Data
+      $('form').submit(function(event) {
+        formStartDate = $('#start-year').val() + '-' + 
+                        $('#start-month').val() + '-' + 
+                        $('#start-day').val();
+
+        formEndDate = $('#end-year').val() + '-' + 
+                        $('#end-month').val() + '-' + 
+                        $('#end-day').val();
+      
+        var fetchParams = {
+          "username": formUsername,
+          "startDate": formStartDate,
+          "endDate": formEndDate
+        };
+
+      //   $.get("api/fetchData", fetchParams, function( results ){
+      //     var csv = convertToCSV(results.data);
+      //     convertToCSV(results.data);
+      //     $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
+      //     $("#username").val('');
+      //     $("#startDate").val('');
+      //     $("#endDate").val('');
+      //   });
+
+        $.ajax({
+          url: "api/fetchData",
+          data: fetchParams,
+          beforeSend: function() {
+             $downloadStatus.css({visibility: "visible"});
+          },
+          success: function(results) {
+            var csv = convertToCSV(results.data);
+            convertToCSV(results.data);
+
+            $downloadStatus.css({visibility: "hidden"});
+
+            $("#csvLink").attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0].click();
+          }
+        });
+        event.preventDefault();
+      });
+
+    });
+  </script>
   </body>
 </html>
