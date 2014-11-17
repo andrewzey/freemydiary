@@ -23,7 +23,7 @@ div.page-wrap {
   display: block;
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -70px;
+  margin-bottom: -90px;
 
 }
 
@@ -32,10 +32,30 @@ div.page-wrap:after {
   display: block;
 }
 footer, div.page-wrap:after {
-  height: 70px; 
+  height: 90px; 
 }
 footer {
   background: #404040;
+  padding: 5px;
+}
+
+footer p {
+  color: #ababab;
+  margin: 0.5em;
+  text-align: center;
+}
+
+footer p.promotion {
+  font-size: 1em;
+}
+
+
+footer p.promotion a { color: #dadada; }
+footer p.promotion a:visited { color: #dadada; }
+
+
+footer p.disclaimer, footer p.copyright {
+  font-size: 0.75em;
 }
 
 div.steps {
