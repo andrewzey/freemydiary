@@ -1,4 +1,10 @@
+html {
+  height: 100%;
+  margin: 0;
+}
+
 body {
+  height: 100%;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -13,9 +19,48 @@ header {
   background-color: #2878ca;
 }
 
+div.page-wrap {
+  display: block;
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -90px;
+
+}
+
+div.page-wrap:after {
+  content: "";
+  display: block;
+}
+footer, div.page-wrap:after {
+  height: 90px; 
+}
+footer {
+  background: #404040;
+  padding: 5px;
+}
+
+footer p {
+  color: #ababab;
+  margin: 0.5em;
+  text-align: center;
+}
+
+footer p.promotion {
+  font-size: 1em;
+}
+
+
+footer p.promotion a { color: #dadada; }
+footer p.promotion a:visited { color: #dadada; }
+
+
+footer p.disclaimer, footer p.copyright {
+  font-size: 0.75em;
+}
+
 div.steps {
   width: 600px;
-  margin: 0 auto 0;
+  margin: 0 auto 40px;
   text-align: center;
   border-top: 1px solid #d9d9d9;
 }
