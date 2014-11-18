@@ -24,7 +24,6 @@ div.page-wrap {
   min-height: 100%;
   /* equal to footer height */
   margin-bottom: -90px;
-
 }
 
 div.page-wrap:after {
