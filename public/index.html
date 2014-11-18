@@ -200,6 +200,8 @@
       var formStartDate;
       var formEndDate;
 
+      var usernameCache; //used to cache username to prevent duplicate AJAX requests
+
       //DOM Elements Used by Event Handlers
       $username = $("#username");
       $usernameStatus = $('#username-status');
@@ -227,20 +229,22 @@
       })();
 
       $username.keyup(function(e) {
-        //reset spinner & download button availability
-        $usernameStatus.css({visibility: "hidden"});
-        $usernameStatus.find('i').removeClass();
-        $usernameStatus.find('i').addClass('fa');
-        $usernameStatus.find('i').addClass('fa-spin');
-        $usernameStatus.find('i').addClass('fa-spinner');
-        $downloadButton.prop('disabled', true);
-        $downloadButton.addClass('disabled');
+        formUsername = $username.val();
+
+        if (formUsername !== usernameCache) {
+          //reset spinner & download button availability
+          $usernameStatus.css({visibility: "hidden"});
+          $usernameStatus.find('i').removeClass();
+          $usernameStatus.find('i').addClass('fa');
+          $usernameStatus.find('i').addClass('fa-spin');
+          $usernameStatus.find('i').addClass('fa-spinner');
+          $downloadButton.prop('disabled', true);
+          $downloadButton.addClass('disabled');
+        }
 
         //set delay for ajax request
         delay(function(){
-          formUsername = $username.val();
-
-          if (formUsername !== '') {
+          if (formUsername !== '' && formUsername !== usernameCache) {
             $.ajax({
               url: "api/userCheck",
               data: {"username": formUsername },
@@ -248,7 +252,7 @@
                  $usernameStatus.css({visibility: "visible"});
               },
               success: function(data) {
-                // console.log(data);
+                usernameCache = formUsername;
 
                 var icon;
 
