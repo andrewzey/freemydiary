@@ -306,8 +306,8 @@
             $downloadStatus.css({visibility: "hidden"});
 
             $("#csvLink")
-              .attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))[0]
-              .attr("download", 'mfp-data.' + formStartDate + '.' + formEndDate + '.' + '.csv')
+              .attr("href", 'data:Application/octet-stream,' + encodeURIComponent(csv))
+              .attr("download", 'mfp-data.' + formStartDate + '.' + formEndDate + '.csv')[0]
               .click();
           }
         });
