@@ -29,3 +29,6 @@ node_modules
 
 # Design Assets
 source
+
+# Bower Components Directory
+bower_components
