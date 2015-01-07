@@ -31,4 +31,4 @@ node_modules
 source
 
 # Bower Components Directory
-bower_components
+public/assets/lib
