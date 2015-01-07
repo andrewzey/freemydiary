@@ -8,9 +8,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
-  
-  <body>
-    <div class="page-wrap">
+
+  <body ng-app="freemydiary">
+    <div class="page-wrap" ng-controller="MainCtrl as mainCtrl">
       <header>
         <h1>FreeMyDiary.com</h1>
       </header>
@@ -167,6 +167,7 @@
         <p class="copyright">&copy; 2015 Andrew Zey</p>
       </div>
     </footer>
+  <!--
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
     $(document).ready(function() {
@@ -279,14 +280,14 @@
 
       //Fetch Data
       $('form').submit(function(event) {
-        formStartDate = $('#start-year').val() + '-' + 
-                        $('#start-month').val() + '-' + 
+        formStartDate = $('#start-year').val() + '-' +
+                        $('#start-month').val() + '-' +
                         $('#start-day').val();
 
-        formEndDate = $('#end-year').val() + '-' + 
-                        $('#end-month').val() + '-' + 
+        formEndDate = $('#end-year').val() + '-' +
+                        $('#end-month').val() + '-' +
                         $('#end-day').val();
-      
+
         var fetchParams = {
           "username": formUsername,
           "startDate": formStartDate,
@@ -316,6 +317,9 @@
 
     });
   </script>
+  -->
+  <script src="assets/lib/angular/angular.min.js"></script>
+  <script src="app/app.js"></script>
 
   <!--Google Analytics-->
   <script>
