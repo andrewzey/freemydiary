@@ -14,13 +14,13 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 app.use(bodyParser.json()); // parse application/json
 
 //Set Environment
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-if (process.env.NODE_ENV === "development") {
-  mongoose.connect('mongodb://localhost/freemydiary-dev'); 
+if (process.env.NODE_ENV === 'development') {
+  mongoose.connect('mongodb://localhost/freemydiary-dev');
 }
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   mongoose.connect(process.env.MONGOLAB_URI);
 }
 
