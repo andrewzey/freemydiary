@@ -4,14 +4,14 @@ var User = require('./user-model');
 var requestHandlers = {};
 
 requestHandlers.userCheck = function(req, res){
-  var username = req.param("username").toLowerCase();
+  var username = req.params.username.toLowerCase();
   mfp.diaryStatusCheck(username, function(status) {
     res.send({'username': username,'status': status});
   });
 };
 
 requestHandlers.fetchData = function(req, res){
-  var username = req.param("username").toLowerCase();
+  var username = req.params.username.toLowerCase();
   var startDate = req.param("startDate");
   var endDate = req.param("endDate");
   mfp.fetchDateRange(username, startDate, endDate, 'all', function(data){
@@ -23,8 +23,8 @@ requestHandlers.fetchData = function(req, res){
       if (err) throw err;
       if (user === null) {
         //save new user in database
-        var newUser = new User({ 
-          'username': username, 
+        var newUser = new User({
+          'username': username,
           'downloads': 1,
           'firstVisit': moment,
           'lastVisit': moment,
@@ -39,7 +39,7 @@ requestHandlers.fetchData = function(req, res){
         user.save(function (err) { if (err) throw err; });
       }
     });
-    
+
   });
 };
 
