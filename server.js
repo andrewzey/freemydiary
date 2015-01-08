@@ -14,19 +14,29 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 app.use(bodyParser.json()); // parse application/json
 
 //Set Environment
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+app.set('env', process.env.NODE_ENV || 'development');
 
-if (process.env.NODE_ENV === 'development') {
+if (app.get('env') === 'development') {
+  app.set('ip', 'localhost');
+  app.set('port', 3000);
   mongoose.connect('mongodb://localhost/freemydiary-dev');
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (app.get('env') === 'production') {
+  app.set('ip', process.env.IP);
+  app.set('port', process.env.PORT);
   mongoose.connect(process.env.MONGOLAB_URI);
 }
 
 //API Route Handling
-app.get('/api/userCheck', handlers.userCheck);
-app.get('/api/fetchData', handlers.fetchData);
+app.get('/api/userCheck/:username', handlers.userCheck);
+app.get('/api/fetchData/:username', handlers.fetchData);
 
 //Start Server
-app.listen(process.env.PORT || 3000);
+app.listen(
+  app.get('port'),
+  app.get('ip'),
+  function(){
+    console.log('Express server listening on port %d, in %s mode', app.get('port'), app.set('env'));
+  }
+);
