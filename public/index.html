@@ -9,8 +9,8 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
 
-  <body ng-app="freemydiary">
-    <div class="page-wrap" ng-controller="MainCtrl as mainCtrl">
+  <body ng-app="freemydiaryApp">
+    <div class="page-wrap">
       <header>
         <h1>FreeMyDiary.com</h1>
       </header>
@@ -18,10 +18,10 @@
       <main>
         <h2>Export your MyFitnessPal Nutrient Data to CSV (Opens in Microsoft Excel):</h2>
         <div class="steps">
-          <form>
+          <form name="diaryForm" ng-controller="DiaryFormCtrl as diaryFormCtrl" ng-submit="reviewForm.$valid && diaryFormCtrl.downloadCSV()" novalidate>
             <div class="step">
               <p>Step 1. Verify your MyFitnessPal Diary is Public:</p>
-              <input id="username" type="text" required placeholder="enter your username"></input>
+              <input id="username" type="text" placeholder="enter your username" ng-model="diaryFormCtrl.username" validate-mfp-name required novalidate></input>
               <span id='username-status' class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
             </div>
 
@@ -318,8 +318,12 @@
     });
   </script>
   -->
+
   <script src="assets/lib/angular/angular.min.js"></script>
   <script src="app/app.js"></script>
+  <script src="app/services/MfpService.js"></script>
+  <script src="app/controllers/DiaryFormCtrl.js"></script>
+  <script src="app/directives/mfpUsernameValidator.js"></script>
 
   <!--Google Analytics-->
   <script>
